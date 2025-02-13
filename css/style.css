@@ -122,6 +122,8 @@ body {
   position: sticky;
   margin-left: 110px;
   transform:translateY(-35px);
+  padding-top: 10px;
+  
   
 }
 
