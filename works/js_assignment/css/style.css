@@ -4,11 +4,17 @@ Student Number:400571015
 Date created: February 13 2025
 Description: CSS stylesheet for JavaScript assignment.
 */
+
+@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
 body {
     background-color: lightgrey;
-    font-family: cursive;
+    font-family: "Covered By Your Grace", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: x-large;
     background-color: pink;
 }
+
 
 #container {
     max-width: 768px;
@@ -55,8 +61,10 @@ input[type=color] {
     padding: 2%;
     text-align: center;
     width: 50%;
-    font-family: cursive;
-    font-size: large;
+    font-family: "Covered By Your Grace", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: x-large;
     color: darkslategrey;
     border-radius: 30px;
     background-color: azure;
@@ -154,8 +162,10 @@ button {
     padding: 2%;
     text-align: center;
     width: 50%;
-    font-family: cursive;
-    font-size: large;
+    font-family: "Covered By Your Grace", serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: x-large;
     color: darkslategrey;
     border-radius: 30px;
     background-color: azure;
