@@ -6,11 +6,12 @@
 
 window.addEventListener("load", function (event) {
 
-    let player1, color1, player2, color2;
+    let player1, color1, player2, color2, rounds;
     let playerSymbol = "X";
     let gameEnded = false;
     let p1Score = 0;
     let p2Score = 0;
+    let round = 0;
     let score = document.getElementById("score-display");
     let playerName = document.getElementById("player-name");
     let home = document.getElementById("homescreen");
@@ -26,6 +27,8 @@ window.addEventListener("load", function (event) {
         player2 = document.getElementById("name2").value;
         color1 = document.getElementById("favcolor1").value;
         color2 = document.getElementById("favcolor2").value;
+        rounds = document.getElementById("round-choices").value;
+        console.log(rounds)
 
         if (!player1 || !player2 || !color1 || !color2) {
             document.getElementById("fill-alert").innerHTML = "Please fill in all sections.";
@@ -35,6 +38,8 @@ window.addEventListener("load", function (event) {
         home.style.display = "none";
         playerName.innerHTML = (player1 + "'s turn");
         playerName.style.color = color1;
+        document.getElementById("reset").style.display = "inline"
+
     });
 
     const winOptions = [
@@ -43,7 +48,6 @@ window.addEventListener("load", function (event) {
         [2, 5, 8], [3, 6, 9],
         [1, 5, 9], [3, 5, 7]
     ];
-
 
     /**
      * Checks if player won by cross checking player symbol with winning possiblities
@@ -60,15 +64,18 @@ window.addEventListener("load", function (event) {
                 document.getElementById(winOptions[i][2]).classList.add("win");
 
                 gameEnded = true;
+                round += 1;
+                console.log(round);
                 winner.innerHTML = (playerSymbol === "X") ? (player1 + " wins!") : (player2 + " wins!");
                 playerName.innerHTML = ("")
                 p1Score = (playerSymbol === "X") ? p1Score + 1 : p1Score;
                 p2Score = (playerSymbol === "O") ? p2Score + 1 : p2Score;
                 score.innerHTML = (player1 + "'s score: " + p1Score + " , " + player2 + "'s score: " + p2Score);
 
-                if (p1Score === 3 || p2Score === 3) {
+                console.log(round, rounds)
+                if (round === parseInt(rounds)) {
                     gameEnded = true;
-                    winner.innerHTML = (p1Score === 3) ? (player1 + " wins the game!") : (player2 + " wins the game!");
+                    winner.innerHTML = (p1Score > p2Score) ? (player1 + " wins the game!") : (player2 + " wins the game!");
                     document.getElementById("reset").style.display = "none"
                 }
 
@@ -86,6 +93,13 @@ window.addEventListener("load", function (event) {
             gameEnded = true;
             winner.innerHTML = "It's a tie!";
             playerName.innerHTML = ("");
+            round += 1;
+
+            if (round === parseInt(rounds)) {
+                gameEnded = true;
+                winner.innerHTML = (p1Score > p2Score) ? (player1 + " wins the game!") : (player2 + " wins the game!");
+                document.getElementById("reset").style.display = "none"
+            }
         }
         return true;
     }
@@ -98,6 +112,7 @@ window.addEventListener("load", function (event) {
                 playerName.style.color = (playerSymbol === "X") ? color2 : color1;
                 this.innerHTML = playerSymbol;
                 this.classList.add(playerSymbol.toLowerCase());
+
                 checkWinner();
                 if (!gameEnded) {
                     checkTie();
@@ -123,10 +138,12 @@ window.addEventListener("load", function (event) {
             document.getElementById(i.toString()).classList.remove("x");
             document.getElementById(i.toString()).classList.remove("o");
             document.getElementById(i.toString()).classList.remove("win");
-            gameEnded = false;
         }
         playerName.innerHTML = (player1 + "'s turn");
         winner.innerHTML = ("")
+        gameEnded = false;
+        playerSymbol = "X";
+        playerName.style.color = color1;
 
     });
 
@@ -136,18 +153,18 @@ window.addEventListener("load", function (event) {
             document.getElementById(i.toString()).classList.remove("x");
             document.getElementById(i.toString()).classList.remove("o");
             document.getElementById(i.toString()).classList.remove("win");
-            gameEnded = false;
         }
-
-        winner.innerHTML = ("")
-
-        p1Score = 0
-        p2Score = 0
+        winner.innerHTML = ""
+        score.innerHTML = ""
+        playerName.innerHTML= ""
+        gameEnded = false;
+        p1Score = 0;
+        p2Score = 0;
+        playerSymbol = "X";
+        round = 0;
 
         home.style.display = "flex";
         game.style.display = "none";
     });
-
-
 
 });
