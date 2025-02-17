@@ -34,6 +34,10 @@ body {
     margin-bottom: 0%;
 }
 
+#homescreen h3 {
+    margin-bottom: 0%;
+}
+
 #fill-alert {
     color: red;
 }
