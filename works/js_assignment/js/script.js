@@ -6,6 +6,7 @@
 
 window.addEventListener("load", function (event) {
 
+    // adding in variables
     let player1, color1, player2, color2, rounds;
     let playerSymbol = "X";
     let gameEnded = false;
@@ -16,12 +17,14 @@ window.addEventListener("load", function (event) {
     let playerName = document.getElementById("player-name");
     let home = document.getElementById("homescreen");
     let game = document.getElementById("gamescreen");
-    let help = this.document.getElementById("helpscreen")
+    let help = this.document.getElementById("helpscreen");
     let winner = document.getElementById("winner-display");
+
 
     game.style.display = "none";
     help.style.display = "none";
 
+    //play button reveals game screen and resets player information
     document.getElementById("playbutton").addEventListener("click", function (event) {
         player1 = document.getElementById("name1").value;
         player2 = document.getElementById("name2").value;
@@ -36,11 +39,12 @@ window.addEventListener("load", function (event) {
         };
         game.style.display = "block";
         home.style.display = "none";
-        playerName.innerHTML = (player1 + "'s turn");
+        playerName.innerHTML = player1 + "'s turn";
         playerName.style.color = color1;
-        document.getElementById("reset").style.display = "inline"
+        document.getElementById("reset").style.display = "inline";
 
     });
+
 
     const winOptions = [
         [1, 2, 3], [4, 5, 6],
@@ -49,9 +53,8 @@ window.addEventListener("load", function (event) {
         [1, 5, 9], [3, 5, 7]
     ];
 
-    /**
-     * Checks if player won by cross checking player symbol with winning possiblities
-     */
+
+    //funcion checks if current player won the round and if the game is over
     function checkWinner() {
 
         for (let i = 0; i < winOptions.length; i++) {
@@ -67,28 +70,29 @@ window.addEventListener("load", function (event) {
                 round += 1;
                 console.log(round);
                 winner.innerHTML = (playerSymbol === "X") ? (player1 + " wins!") : (player2 + " wins!");
-                playerName.innerHTML = ("")
+                playerName.innerHTML = "";
                 p1Score = (playerSymbol === "X") ? p1Score + 1 : p1Score;
                 p2Score = (playerSymbol === "O") ? p2Score + 1 : p2Score;
-                score.innerHTML = (player1 + "'s score: " + p1Score + " , " + player2 + "'s score: " + p2Score);
+                score.innerHTML = player1 + "'s score: " + p1Score + " , " + player2 + "'s score: " + p2Score;
 
-                console.log(round, rounds)
                 if (round === parseInt(rounds)) {
                     gameEnded = true;
                     winner.innerHTML = (p1Score > p2Score) ? (player1 + " wins the game!") : (player2 + " wins the game!");
-                    document.getElementById("reset").style.display = "none"
-                }
+                    document.getElementById("reset").style.display = "none";
+                };
+            };
+        };
+    };
 
-            }
-        }
-    }
 
+    // function checks if the round ended in a tie and if the game is over
     function checkTie() {
         for (let i = 1; i <= 9; i++) {
             if (document.getElementById(i.toString()).innerHTML === "") {
                 return false;
-            }
-        }
+            };
+        };
+
         if (!gameEnded) {
             gameEnded = true;
             winner.innerHTML = "It's a tie!";
@@ -99,13 +103,15 @@ window.addEventListener("load", function (event) {
                 gameEnded = true;
                 winner.innerHTML = (p1Score > p2Score) ? (player1 + " wins the game!") : (player2 + " wins the game!");
                 document.getElementById("reset").style.display = "none"
-            }
-        }
+            };
+        };
         return true;
-    }
+    };
 
+
+    // for loop that runs the actual game
     for (let i = 1; i <= 9; i++) {
-        document.getElementById(i.toString()).addEventListener("click", function () {
+        document.getElementById(i.toString()).addEventListener("click", function (event) {
             if (this.innerHTML === "" && !gameEnded) {
                 this.style.color = (playerSymbol === "X") ? color1 : color2;
                 playerName.innerHTML = (playerSymbol === "X") ? (player2 + "'s turn") : (player1 + "'s turn");
@@ -116,47 +122,55 @@ window.addEventListener("load", function (event) {
                 checkWinner();
                 if (!gameEnded) {
                     checkTie();
-                }
-                playerSymbol = (playerSymbol === "X") ? "O" : "X";
-            }
-        });
-    }
+                };
 
+                playerSymbol = (playerSymbol === "X") ? "O" : "X";
+            };
+        });
+    };
+
+
+    //opens the help menu
     document.getElementById("helpbutton").addEventListener("click", function (event) {
         help.style.display = "block";
         game.style.display = "none";
     })
 
+    // returns from help menu
     document.getElementById("backbutton").addEventListener("click", function (event) {
         help.style.display = "none";
         game.style.display = "block";
     })
 
-    document.getElementById("reset").addEventListener("click", function () {
+
+    //resets the grid for the next round
+    document.getElementById("reset").addEventListener("click", function (event) {
         for (let i = 1; i <= 9; i++) {
             document.getElementById(i.toString()).innerHTML = "";
             document.getElementById(i.toString()).classList.remove("x");
             document.getElementById(i.toString()).classList.remove("o");
             document.getElementById(i.toString()).classList.remove("win");
-        }
+        };
+
         playerName.innerHTML = (player1 + "'s turn");
-        winner.innerHTML = ("")
+        winner.innerHTML = "";
         gameEnded = false;
         playerSymbol = "X";
         playerName.style.color = color1;
-
     });
 
+
+    // resets the entire game and sends players back to home screen
     document.getElementById("new-game").addEventListener("click", function (event) {
         for (let i = 1; i <= 9; i++) {
             document.getElementById(i.toString()).innerHTML = "";
             document.getElementById(i.toString()).classList.remove("x");
             document.getElementById(i.toString()).classList.remove("o");
             document.getElementById(i.toString()).classList.remove("win");
-        }
-        winner.innerHTML = ""
-        score.innerHTML = ""
-        playerName.innerHTML= ""
+        };
+        winner.innerHTML = "";
+        score.innerHTML = "";
+        playerName.innerHTML = "";
         gameEnded = false;
         p1Score = 0;
         p2Score = 0;
