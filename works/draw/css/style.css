@@ -1,0 +1,80 @@
+/*
+Name: Tala Idris
+Student Number:400571015
+
+Name: Azeen Saba
+Student Number: 400520177
+
+Date created: February 26 2025
+Description: CSS stylesheet for Canvas assignment.
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy&display=swap');
+
+.sour-gummy {
+    font-family: "Sour Gummy", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700; 
+    font-style: normal;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+#testCanvas {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    margin: 30px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-family: "Sour Gummy", sans-serif;
+}
+
+body {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: #634FA2;
+}
+
+.color {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+}
+
+.roundedButtons {
+    background-size: cover; 
+    width: 30px; 
+    height: 30px;
+    border-radius: 20%; 
+    border: none;
+    cursor: pointer;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 5px;
+}
+
+.roundedButtons:hover {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
+}
+
+#colors {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#contents {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
